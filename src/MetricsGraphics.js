@@ -17,6 +17,7 @@ export default class MetricsGraphics extends React.Component {
 	constructor(props){
 		super(props);
 		this.mgData={};
+		this.className=props.className ? "metricsGraphicsCon " + props.className : "metricsGraphicsCon";
 	}
 	componentDidMount(){
 		this.mgData=Object.assign(this.mgData,getMGOptions(this.props));
@@ -41,13 +42,14 @@ export default class MetricsGraphics extends React.Component {
 	render(){
 		const _this=this;
 		return(
-			<div className="metricsGraphicsCon" ref={ (c) =>{ if(c!=null) _this.mgData.target=c; } }></div>
+			<div className={this.className} ref={ (c) =>{ if(c!=null) _this.mgData.target=c; } }></div>
 		);
 		
 	}
 }
 
 MetricsGraphics.propTypes={
+	className:React.PropTypes.any, //allows for styling of resulting div container
 	axes_not_compact:React.PropTypes.any, //determines whether to draw compact or non-compact axes
 	european_clock:React.PropTypes.any, //determines whether to show labels using a 24-hour clock
 	inflator:React.PropTypes.any, //a multiplier for inflating max_x and max_y
